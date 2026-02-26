@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build
+dist/
+build/
+.next/
+out/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Other
+uploads/
+*.log
+temp/
+tmp/
+C:\Users\phani\.gemini\antigravity\brain\
+C:\Users\phani\.gemini\antigravity\scratch\Captone\backend\uploads\
