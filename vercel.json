@@ -1,9 +1,8 @@
 {
     "version": 2,
-    "buildCommand": "cd frontend && npm install && npm run build",
-    "outputDirectory": "frontend/dist",
+    "buildCommand": "cd frontend && npm install && npm run build && mv dist ../dist",
+    "outputDirectory": "dist",
     "framework": "vite",
-    "cleanUrls": true,
     "rewrites": [
         {
             "source": "/(.*)",
