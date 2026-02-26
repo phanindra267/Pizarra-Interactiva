@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Live Drawing Sync",
+        "description": "Real-time drawing broadcasted to all participants via WebSockets.",
+        "status": "Production Ready"
+    },
+    {
+        "id": 2,
+        "name": "Smart Join Flow",
+        "description": "Automatically pre-fills Room IDs when a password is required.",
+        "status": "Enhanced"
+    },
+    {
+        "id": 3,
+        "name": "Premium UI",
+        "description": "Dark mode with glassmorphism and pulsing live indicators.",
+        "status": "Active"
+    }
+]

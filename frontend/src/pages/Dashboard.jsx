@@ -71,15 +71,16 @@ export default function Dashboard() {
         }
     };
 
-    const enterRoom = async (roomId) => {
+    const enterRoom = async (roomId, hasPassword) => {
         try {
             await api.post(`/rooms/${roomId}/join`);
             navigate(`/room/${roomId}`);
         } catch (err) {
             const msg = err.response?.data?.message;
-            if (msg === 'Password required for this room') {
-                // Prompt for password — for now just show toast
-                showToast('This room requires a password. Use "Join Room" with the room ID.', 'error');
+            if (msg === 'Password required for this room' || hasPassword) {
+                setJoinId(roomId);
+                setShowJoin(true);
+                setError('This room requires a password.');
             } else {
                 showToast(msg || 'Failed to enter room', 'error');
             }
@@ -217,10 +218,16 @@ export default function Dashboard() {
             ) : (
                 <div className="rooms-grid">
                     {filteredRooms.map(room => (
-                        <div key={room._id} className="card room-card" onClick={() => enterRoom(room.roomId)}>
+                        <div key={room._id} className="card room-card" onClick={() => enterRoom(room.roomId, !!room.password)}>
                             {/* Badges */}
                             <div className="room-badges">
                                 {isHost(room) && <span className="badge badge-accent">👑 Host</span>}
+                                {room.participants?.length > 0 && (
+                                    <span className="live-indicator">
+                                        <span className="live-dot"></span>
+                                        Live
+                                    </span>
+                                )}
                                 {room.isLocked && <span className="badge badge-warning">🔒 Locked</span>}
                                 {room.password && !room.isLocked && <span className="badge badge-warning">🔑</span>}
                             </div>
