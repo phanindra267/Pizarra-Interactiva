@@ -11,7 +11,8 @@ export function useSocket() {
     useEffect(() => {
         if (!user) return;
         if (!socketInstance) {
-            socketInstance = io('/', {
+            const socketUrl = import.meta.env.VITE_API_URL || window.location.origin;
+            socketInstance = io(socketUrl, {
                 transports: ['websocket', 'polling'],
                 withCredentials: true,
                 reconnection: true,

@@ -45,6 +45,33 @@ A high-performance, real-time collaborative whiteboard platform built for enterp
    npm run dev
    ```
 
+## 🚀 Deployment
+
+The project is structured for **unified hosting** (Backend serving Frontend).
+
+### Production Build
+1. In the root directory, run:
+   ```bash
+   npm run build
+   ```
+   This will build the frontend and move the assets to `backend/public`.
+
+2. To start the production server:
+   ```bash
+   cd backend
+   npm start
+   ```
+
+### Hosting on Render/Railway
+- **Root Directory**: `.`
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `cd backend && npm start`
+- **Environment Variables**:
+  - `NODE_ENV`: `production`
+  - `MONGO_URI`: Your MongoDB Atlas URI
+  - `JWT_SECRET`: A secure random string
+  - `CLIENT_URL`: Your production domain
+
 ## 📜 API Documentation
 
 ### Auth

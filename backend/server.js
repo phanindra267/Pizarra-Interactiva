@@ -53,7 +53,14 @@ if (!allowedOrigin && process.env.NODE_ENV === 'production') {
 }
 
 app.use(cors({
-    origin: allowedOrigin || 'http://localhost:3000',
+    origin: (origin, callback) => {
+        const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:3000', 'http://localhost:3002'];
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 }));
@@ -108,12 +115,12 @@ app.get('/auth/google/callback', passport.authenticate('google', { session: fals
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-    const frontendDist = path.join(__dirname, '../frontend/dist');
-    if (fs.existsSync(frontendDist)) {
-        app.use(express.static(frontendDist));
+    const frontendPublic = path.join(__dirname, 'public');
+    if (fs.existsSync(frontendPublic)) {
+        app.use(express.static(frontendPublic));
         app.get('*', (req, res) => {
             if (!req.url.startsWith('/api')) {
-                res.sendFile(path.resolve(frontendDist, 'index.html'));
+                res.sendFile(path.resolve(frontendPublic, 'index.html'));
             }
         });
     }
